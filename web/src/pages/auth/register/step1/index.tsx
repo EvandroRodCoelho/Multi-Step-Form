@@ -18,6 +18,7 @@ export function Step1() {
                     <input
                     type="text"
                     className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
+                    id="fullName" 
                     placeholder="Enter full name"
                     />
 
@@ -34,6 +35,7 @@ export function Step1() {
                 <div className="relative">
                     <select
                     className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
+                    id="gender"
                     >
                     <option value="">Select gender</option>
                     <option value="male">Male</option>
@@ -51,6 +53,7 @@ export function Step1() {
                     type="email"
                     className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
                     placeholder="Enter email"
+                    id="email"
                     />
 
                     <span className="absolute inset-y-0 end-0 grid place-content-center px-4">
@@ -69,6 +72,7 @@ export function Step1() {
                     type="password"
                     className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
                     placeholder="Enter password"
+                    id="password"
                     />
 
                     <span className="absolute inset-y-0 end-0 grid place-content-center px-4">
@@ -85,6 +89,7 @@ export function Step1() {
                     type="password"
                     className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
                     placeholder="Enter a confirm password"
+                    id="confirmPassword"
                     />
 
                     <span className="absolute inset-y-0 end-0 grid place-content-center px-4">
