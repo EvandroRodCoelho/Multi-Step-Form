@@ -4,7 +4,7 @@ import {describe, expect, it}  from "vitest";
 import {Error} from "./";
 import { MemoryRouter } from 'react-router-dom';
 describe("Error", () => {
-    it("should like error page is render", ()=> {
+    it("should able error page is render", ()=> {
         const {getByText} = render(
         <MemoryRouter>
             <Error />
