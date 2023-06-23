@@ -1,43 +1,13 @@
 import { Link } from "react-router-dom";
 import { CiLocationOn } from "react-icons/ci";
+import { Steps } from "../../../../components/register/steps";
 
 export function Step2() {
-  const currentStep = 2;
 
-  const isStepActive = (step:number) => {
-    return step === currentStep;
-  };
-
-  const getStepBackground = (step:number) => {
-    return isStepActive(step) ? "bg-blue-500" : "bg-gray-300";
-  };
 
   return (
     <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
-      <div className="flex justify-center space-x-4 my-4">
-        <Link
-            to="/register/step1"
-            className={`w-8 h-8 rounded-full flex items-center justify-center text-white ${getStepBackground(
-            1
-          )}`}
-        >
-          1
-        </Link>
-        <div
-          className={`w-8 h-8 rounded-full flex items-center justify-center text-white ${getStepBackground(
-            2
-          )}`}
-        >
-          2
-        </div>
-        <div
-          className={`w-8 h-8 rounded-full flex items-center justify-center cursor-not-allowed text-white ${getStepBackground(
-            3
-          )}`}
-        >
-          3
-        </div>
-      </div>
+      <Steps  currentStep={2}/>
       <header className="mx-auto max-w-lg text-center">
         <h1 className="text-2xl font-bold sm:text-3xl">Address Information</h1>
       </header>
