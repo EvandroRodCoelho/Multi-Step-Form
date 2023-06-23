@@ -48,7 +48,7 @@ export function Steps({ currentStep }: StepsProps) {
         case 2:
           return "Address";
         case 3:
-          return "Plan";
+          return "Social profiles";
         default:
           return "";
       }
