@@ -34,14 +34,14 @@ export function Step3() {
                 </div>
 
                 <div>
-                    <label htmlFor="gitHubURl" className="sr-only">Linkedin</label>
+                    <label htmlFor="GithubURl" className="sr-only">Github</label>
 
                     <div className="relative">
                         <input
                             type="url"
                             className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
                             placeholder="Enter a GitHub URL"
-                            id="gitHubURl"
+                            id="GithubURl"
                         />
 
                         <span className="absolute inset-y-0 end-0 grid place-content-center px-4">
