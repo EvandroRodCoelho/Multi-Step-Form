@@ -58,11 +58,11 @@ export function Step2() {
               className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
               id="country"
               placeholder="Enter country"
-            />
-          </div>
-            <span className="absolute inset-y-0 end-0 grid place-content-center px-4">
-              <CiLocationOn className="h-4 w-4 text-gray-400" />
-            </span>
+            />        
+              <span className="absolute inset-y-0 end-0 grid place-content-center px-4">
+                <CiLocationOn className="h-4 w-4 text-gray-400" />
+              </span>
+            </div>
         </div>
 
         <div>
