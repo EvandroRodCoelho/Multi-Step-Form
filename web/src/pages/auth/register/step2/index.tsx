@@ -4,6 +4,8 @@ import { Steps } from "../../../../components/register/steps";
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { useContext } from "react";
+import { UserContext } from "../../../../context/userContext";
 
 
 const AddressInformationSchema = z.object({
@@ -15,15 +17,27 @@ const AddressInformationSchema = z.object({
 type AddressInformationData = z.infer <typeof AddressInformationSchema>;
 
 export function Step2() {
-
+  const { user, handleUser}  = useContext(UserContext);
+  console.log(user)
   const {register, handleSubmit, formState:{errors} } = useForm<AddressInformationData>({
       resolver: zodResolver(AddressInformationSchema),
+      defaultValues: {
+        city:user.address.city,
+        country:user.address.country,
+        state:user.address.state,
+        zipCode:user.address.zipCode,
+      }
+
   });
 
   const navigate = useNavigate();
-  function handleSubmitToStep3(data:AddressInformationData): void { 
+  function handleSubmitToStep3(data:AddressInformationData,): void { 
       event?.preventDefault();
-      console.log(data);
+      handleUser({
+          socialProfile:user.socialProfile,
+          informationPessoal: user.informationPessoal,
+          address:data
+      });
       navigate("/register/step3");
   }
 

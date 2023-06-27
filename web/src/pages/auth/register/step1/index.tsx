@@ -4,6 +4,8 @@ import { Steps } from "../../../../components/register/steps";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useContext } from "react";
+import { UserContext } from "../../../../context/userContext";
 
 
 const UserInformationPersonalSchema = z.object({
@@ -11,7 +13,7 @@ const UserInformationPersonalSchema = z.object({
     regex(/^[a-zA-Z]*$/,"Cannot contain special characters or numbers"),
     email: z.string().nonempty("Email is required").email(),
     gender:z.string().nonempty("Gender is required"),
-    password: z.string().nonempty("Password is required").min(6,"password must be at least 6 characters"),
+    password: z.string().nonempty("Password is required").min(6,"Password must be at least 6 characters"),
     confirmPassword: z.string().nonempty("Password confirmation is required"),
 }).refine((field) => field.password === field.confirmPassword, {
     path:["confirmPassword"],
@@ -22,17 +24,35 @@ type UserInformationPersonalData = z.infer <typeof UserInformationPersonalSchema
 
 
 export function Step1() {
+    const {user, handleUser}  = useContext(UserContext);
+
     const {register, handleSubmit, formState:{errors} } = useForm<UserInformationPersonalData>({
         resolver: zodResolver(UserInformationPersonalSchema),
+        defaultValues: {
+            fullName:user?.informationPessoal.fullName ,
+            email:user?.informationPessoal.email ,
+            gender:user?.informationPessoal.gender ,
+            password:user?.informationPessoal.password,
+            confirmPassword: ""
+        }
     });
     const navigate = useNavigate();
 
-    function handleSubmitToStep2(data: UserInformationPersonalData): void { 
-        event?.preventDefault();
-        console.log(data);
-        navigate("/register/step2");
-    }
-
+function handleSubmitToStep2(data: UserInformationPersonalData): void { 
+    event?.preventDefault();
+    handleUser({
+        informationPessoal: {
+            email: data.email,
+            fullName: data.fullName,
+            gender: data.gender,
+            password: data.password
+        },
+        address: user.address,
+        socialProfile: user.socialProfile
+    });
+    console.log(user);
+    navigate("/register/step2");
+}
     return(
     
         <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">

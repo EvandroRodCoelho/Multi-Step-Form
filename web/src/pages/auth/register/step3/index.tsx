@@ -4,6 +4,8 @@ import { AiOutlineLinkedin, AiOutlineGithub } from "react-icons/ai";
 import { z } from "zod"; 
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useContext } from "react";
+import { UserContext } from "../../../../context/userContext";
 
 const SocialProfileSchema = z.object({
     urlLinkedin:z.string().nonempty("Linkedin url is required").url("Is not url link"),
@@ -11,13 +13,22 @@ const SocialProfileSchema = z.object({
   })
 
 type UserSocialProfileData = z.infer <typeof SocialProfileSchema>;
+
 export function Step3() {
+    const {user, handleUser}  = useContext(UserContext);
+
+    console.log(user);
     const {register, handleSubmit, formState:{errors} } = useForm<UserSocialProfileData>({
         resolver: zodResolver(SocialProfileSchema)
     });
 
     function submit(data:UserSocialProfileData): void { 
         event?.preventDefault();
+        handleUser({
+            address:user.address,
+            informationPessoal: user.informationPessoal,
+            socialProfile:data
+        });
         console.log(data);
     }
 
