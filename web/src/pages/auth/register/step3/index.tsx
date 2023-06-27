@@ -88,7 +88,7 @@ export function Step3() {
                         type="submit"
                         className="inline-block rounded-lg bg-blue-500 px-5 py-3 text-sm font-medium text-white"
                     >
-                       Finish
+                    Finish
                     </button>
                 </div>
             </form>

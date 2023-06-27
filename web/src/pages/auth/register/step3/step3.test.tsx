@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, act, waitFor } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { Step3 } from './';
 import "@testing-library/jest-dom";
@@ -33,5 +33,20 @@ describe('Step3', () => {
     expect(githubInput.value).toBe('https://github.com/example');
   });
 
+  it("should show error message when fields was empty",async () => {
+    const {getAllByText,getByText} = render(        
+        <MemoryRouter>
+            <Step3 />
+        </MemoryRouter>
+    );
+    const button = getAllByText('Finish')[0]
+    act(()=> {
+        fireEvent.click(button)
+    })
 
-});
+    await waitFor(()=> {
+        expect(getByText("Linkedin url is required")).toBeVisible();
+        expect(getByText("GitHub url is required")).toBeVisible();
+    })
+  })
+})
