@@ -4,12 +4,16 @@ import { Step1 } from "../pages/auth/register/step1";
 import { Error }   from "../pages/error"
 import { Step3 } from "../pages/auth/register/step3";
 import { Step2} from "../pages/auth/register/step2";
+import { Login } from "../pages/auth/login";
 export const router = createBrowserRouter([ 
     {
         path:"/",
         element:<Home />,
         errorElement:<Error  />
-
+    },
+    {
+        path:"/login",
+        element:<Login />
     },
     {
         path:"/register/step1",
