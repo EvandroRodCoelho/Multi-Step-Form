@@ -8,7 +8,7 @@ import { useCallback, useContext,useEffect } from "react";
 import { UserContext } from "../../../../context/userContext";
 import axios from "axios";
 import { zipCodeMask } from "../../../../utils/masks/zipCodeMask";
-
+import states from '../../../../../stateBrazil.json';
 
 const AddressInformationSchema = z.object({
   zipCode:z.string().nonempty("Zip Code is required"), 
@@ -61,17 +61,37 @@ export function Step2() {
     setValue("state",value.state);
   },[setValue]);
 
-  const handleGetAddress = useCallback(async (zipCode:string) => {
-    const { data } = await axios.get(`https://viacep.com.br/ws/${zipCode}/json/`);
-    const address:AddressInformationData =  {
-      zipCode:data.cep,
-      city:data.localidade,
-      country:"Brasil",
-      state:data.uf,
+  const handleGetAddress = useCallback(async (zipCode: string) => {
+    try {
+      const { data } = await axios.get(`https://viacep.com.br/ws/${zipCode}/json/`);
+  
+      if (data.error) throw new Error(data.error);
+  
+      const stateFiltered = states.UF.filter(state => data.uf === state.uf);
+      const stateName = stateFiltered.length > 0 ? stateFiltered[0].name : "";
+    
+      const address: AddressInformationData = {
+        zipCode:data.cep ? data.cep: zipCode,
+        city: data.localidade,
+        country: "Brasil",
+        state: stateName,
+      };
+      handleSetValue(address);
+    } catch (error) {
+      console.error('Erro ao obter o endereço:', error);
+      const errorAddress: AddressInformationData = {
+        zipCode: zipCode,
+        city: '',
+        country: '',
+        state: '',
+      };
+      handleSetValue(errorAddress);
     }
-    handleSetValue(address);
-  },[handleSetValue])
-
+  }, [handleSetValue]);
+  
+  useEffect(()=> {
+    console.log("ola");
+  },[])
  
   useEffect(() => {
     setValue("zipCode", zipCodeMask(zipCodeValue));
