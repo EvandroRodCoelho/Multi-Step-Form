@@ -4,8 +4,10 @@ import { Steps } from "../../../../components/register/steps";
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { useContext } from "react";
+import { useCallback, useContext,useEffect } from "react";
 import { UserContext } from "../../../../context/userContext";
+import axios from "axios";
+import { zipCodeMask } from "../../../../utils/masks/zipCodeMask";
 
 
 const AddressInformationSchema = z.object({
@@ -13,20 +15,29 @@ const AddressInformationSchema = z.object({
   city:z.string().nonempty("City is required"),
   country:z.string().nonempty("Country is required"),
   state:z.string().nonempty("State is required"),
-})
+}).transform((fields)  => ({
+  zipCode: fields.zipCode,
+  city: fields.city,
+  country: fields.country,
+  state: fields.state,
+}));
 type AddressInformationData = z.infer <typeof AddressInformationSchema>;
 
 export function Step2() {
   const { user, handleUser}  = useContext(UserContext);
-  console.log(user)
-  const {register, handleSubmit, formState:{errors} } = useForm<AddressInformationData>({
+
+  const {register, handleSubmit, 
+    formState:{errors}, watch,
+    setValue } = useForm<AddressInformationData>({
       resolver: zodResolver(AddressInformationSchema),
       defaultValues: {
         city:user.address.city,
         country:user.address.country,
         state:user.address.state,
         zipCode:user.address.zipCode,
-      }
+      },
+      mode:"all",
+      criteriaMode:"all",
 
   });
 
@@ -41,7 +52,35 @@ export function Step2() {
       navigate("/register/step3");
   }
 
+  const zipCodeValue = watch("zipCode");
 
+  const handleSetValue = useCallback(async (value:AddressInformationData) => {
+    setValue("zipCode",value.zipCode);
+    setValue("city",value.city);
+    setValue("country",value.country);
+    setValue("state",value.state);
+  },[setValue]);
+
+  const handleGetAddress = useCallback(async (zipCode:string) => {
+    const { data } = await axios.get(`https://viacep.com.br/ws/${zipCode}/json/`);
+    const address:AddressInformationData =  {
+      zipCode:data.cep,
+      city:data.localidade,
+      country:"Brasil",
+      state:data.uf,
+    }
+    handleSetValue(address);
+  },[handleSetValue])
+
+  
+ 
+  useEffect( () => {
+    setValue("zipCode", zipCodeMask(zipCodeValue));
+   if(zipCodeValue.length !== 9) return;
+
+   handleGetAddress(zipCodeValue);
+  }, [handleGetAddress, setValue, zipCodeValue]);
+   
 
   return (
     <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
@@ -62,6 +101,7 @@ export function Step2() {
               className={`w-full rounded-lg p-4 pe-12 text-sm shadow-sm border border-zinc-900 data-[error]:border-red-500`}
               id="zipCode"
               placeholder="Enter Zip Code" 
+              maxLength={9}
               {...register("zipCode")}
             />
 

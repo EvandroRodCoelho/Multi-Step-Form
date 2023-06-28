@@ -9,7 +9,7 @@ describe('Step2', () => {
         <Step2 />
       </MemoryRouter>
     );
-
+    screen.debug();
     const cepInput = screen.getByPlaceholderText('Enter Zip Code');
     const cityInput = screen.getByPlaceholderText('Enter city');
     const countryInput = screen.getByPlaceholderText('Enter country');
@@ -30,7 +30,7 @@ describe('Step2', () => {
     act(()=> {
         fireEvent.click(button)
     })
-
+ 
     await waitFor(()=> {
         expect(getByText("Zip Code is required")).toBeVisible();
         expect(getByText("City is required")).toBeVisible();
