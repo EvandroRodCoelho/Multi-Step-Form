@@ -1,7 +1,7 @@
 import {createBrowserRouter} from "react-router-dom";
 import { Home } from "../pages/home";
 import { Step1 } from "../pages/auth/register/step1";
-import {Error}   from "../pages/error"
+import { Error }   from "../pages/error"
 import { Step3 } from "../pages/auth/register/step3";
 import { Step2} from "../pages/auth/register/step2";
 export const router = createBrowserRouter([ 

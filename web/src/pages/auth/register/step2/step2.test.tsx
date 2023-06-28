@@ -21,21 +21,21 @@ describe('Step2', () => {
     expect(stateInput).toBeInTheDocument();
   });
   it("should show error message when fields was empty",async () => {
-    const {getByText} = render(        
-        <MemoryRouter>
-            <Step2 />
-        </MemoryRouter>
-    );
+    const {getByText, getByRole} = render(<Step2 />, { wrapper: MemoryRouter });
+
     const button = getByText('Next step')
-    act(()=> {
-        fireEvent.click(button)
-    })
- 
+    await act(()=> {
+          fireEvent.click(button)
+      })
+    expect(screen.getByLabelText("Zip Code")).toHaveValue("");
+
+    const errorElement = getByRole('alert-Zipcode');
+
     await waitFor(()=> {
-        expect(getByText("Zip Code is required")).toBeVisible();
         expect(getByText("City is required")).toBeVisible();
         expect(getByText("Country is required")).toBeVisible();
         expect(getByText("State is required")).toBeVisible();
+        expect(errorElement).toBeVisible();
     })
    
 })
