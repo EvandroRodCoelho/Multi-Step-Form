@@ -6,7 +6,7 @@ import { UserProviderProps } from "../types/UserProviderType";
 const UserContext = createContext<UserProviderProps>({} as UserProviderProps);
 
 function UserProvider({ children }:{ children: ReactNode} ) {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
+    
     const [user , setUser] = useState<UserProps>(mockedUser)
 
     function handleUser(user:UserProps) {

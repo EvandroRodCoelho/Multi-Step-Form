@@ -31,10 +31,10 @@ export function Step2() {
     setValue } = useForm<AddressInformationData>({
       resolver: zodResolver(AddressInformationSchema),
       defaultValues: {
-        city:user.address.city,
-        country:user.address.country,
-        state:user.address.state,
-        zipCode:user.address.zipCode,
+        city:user?.address.city,
+        country:user?.address.country,
+        state:user?.address.state,
+        zipCode:user?.address.zipCode,
       },
       mode:"all",
       criteriaMode:"all",
@@ -72,16 +72,14 @@ export function Step2() {
     handleSetValue(address);
   },[handleSetValue])
 
-  
  
-  useEffect( () => {
+  useEffect(() => {
     setValue("zipCode", zipCodeMask(zipCodeValue));
-   if(zipCodeValue.length !== 9) return;
-
-   handleGetAddress(zipCodeValue);
+    if (!zipCodeValue || zipCodeValue.length !== 9) return;
+  
+    handleGetAddress(zipCodeValue);
   }, [handleGetAddress, setValue, zipCodeValue]);
-   
-
+  
   return (
     <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
       <Steps  currentStep={2}/>
@@ -111,7 +109,7 @@ export function Step2() {
                 className={`h-4 w-4 text-zinc-800 data-[error]:text-red-500`}  />
             </span>
           </div>
-          {errors.zipCode  && <p className="text-sm text-red-500 ">{errors.zipCode.message}</p>}
+          {errors.zipCode  && <p role="alert-Zipcode"className="text-sm text-red-500 ">{errors.zipCode.message}</p>}
         </div>
 
         <div>

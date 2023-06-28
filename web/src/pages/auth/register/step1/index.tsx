@@ -50,7 +50,6 @@ function handleSubmitToStep2(data: UserInformationPersonalData): void {
         address: user.address,
         socialProfile: user.socialProfile
     });
-    console.log(user);
     navigate("/register/step2");
 }
     return(
