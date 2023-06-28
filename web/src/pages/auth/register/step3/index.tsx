@@ -1,10 +1,10 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Steps } from "../../../../components/register/steps";
 import { AiOutlineLinkedin, AiOutlineGithub } from "react-icons/ai";
 import { z } from "zod"; 
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useContext } from "react";
+import { useCallback, useContext, useEffect } from "react";
 import { UserContext } from "../../../../context/userContext";
 
 const SocialProfileSchema = z.object({
@@ -16,7 +16,7 @@ type UserSocialProfileData = z.infer <typeof SocialProfileSchema>;
 
 export function Step3() {
     const {user, handleUser}  = useContext(UserContext);
-
+    const navigate = useNavigate();
     console.log(user);
     const {register, handleSubmit, formState:{errors} } = useForm<UserSocialProfileData>({
         resolver: zodResolver(SocialProfileSchema)
@@ -31,7 +31,24 @@ export function Step3() {
         });
         console.log(data);
     }
+    const checkFieldsStep3 =useCallback(() => {
+        const requiredFieldsStep3 = [
+          user.address.city,
+          user.address.country,
+          user.address.state,
+          user.address.zipCode,
+        ];
 
+        const isAnyFieldEmptyStep3 = requiredFieldsStep3.some((field) => field === "");
+      
+        return !isAnyFieldEmptyStep3;
+      },[user.address.city, user.address.country, user.address.state, user.address.zipCode]);
+
+    useEffect(() => {
+        if(!checkFieldsStep3()){
+            navigate("/register/step1")
+        }
+    },[checkFieldsStep3, navigate])
     return(
         <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
             <div>

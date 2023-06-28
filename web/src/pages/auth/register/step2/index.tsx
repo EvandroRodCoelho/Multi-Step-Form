@@ -10,6 +10,7 @@ import axios from "axios";
 import { zipCodeMask } from "../../../../utils/masks/zipCodeMask";
 import states from '../../../../../stateBrazil.json';
 
+
 const AddressInformationSchema = z.object({
   zipCode:z.string().nonempty("Zip Code is required"), 
   city:z.string().nonempty("City is required"),
@@ -25,6 +26,27 @@ type AddressInformationData = z.infer <typeof AddressInformationSchema>;
 
 export function Step2() {
   const { user, handleUser}  = useContext(UserContext);
+
+  const checkFields = useCallback(() => () =>{
+    // Definir os campos obrigatórios
+    const requiredFields = [
+      user.informationPessoal.email,
+      user.informationPessoal.fullName,
+      user.informationPessoal.password,
+      user.informationPessoal.gender,
+      user.address.city,
+      user.address.country,
+      user.address.state,
+      user.address.zipCode,
+      user.socialProfile.urlGitHub,
+      user.socialProfile.urlLinkedin,
+    ];
+
+    const isAnyFieldEmpty = requiredFields.some((field) => field === "");
+
+    return !isAnyFieldEmpty;
+  },[user.address.city, user.address.country, user.address.state, user.address.zipCode, user.informationPessoal.email, user.informationPessoal.fullName, user.informationPessoal.gender, user.informationPessoal.password, user.socialProfile.urlGitHub, user.socialProfile.urlLinkedin]);
+
 
   const {register, handleSubmit, 
     formState:{errors}, watch,
@@ -89,9 +111,12 @@ export function Step2() {
     }
   }, [handleSetValue]);
   
-  useEffect(()=> {
-    console.log("ola");
-  },[])
+  useEffect(() => {
+    const areAllFieldsFilled = checkFields();
+    if (!areAllFieldsFilled) { 
+      navigate("/register/step1")
+    }
+  }, [checkFields, navigate]);
  
   useEffect(() => {
     setValue("zipCode", zipCodeMask(zipCodeValue));
