@@ -6,11 +6,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useCallback, useContext, useEffect } from "react";
 import { UserContext } from "../../../../context/userContext";
-
-const SocialProfileSchema = z.object({
-    urlLinkedin:z.string().nonempty("Linkedin url is required").url("Is not url link"),
-    urlGitHub:z.string().nonempty("GitHub url is required").url("Is not url link"),
-  })
+import { SocialProfileSchema } from "./SocialProfileSchema"
 
 type UserSocialProfileData = z.infer <typeof SocialProfileSchema>;
 

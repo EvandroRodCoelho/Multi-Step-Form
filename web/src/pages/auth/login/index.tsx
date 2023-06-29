@@ -3,16 +3,13 @@ import { useForm } from "react-hook-form";
 import { AiOutlineEye, AiOutlineMail } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { z } from "zod";
+import { LoginSchema } from "./LoginSchema";
 
-const LogonSchema = z.object({
-    email:z.string().nonempty("Password is required").email(),
-    password:z.string().nonempty("Password is required")
-})
 
-type LogonData = z.infer <typeof LogonSchema>;
+type LogonData = z.infer <typeof LoginSchema>;
 export function Login() {
     const {register, handleSubmit, formState:{errors} } = useForm<LogonData>({
-        resolver: zodResolver(LogonSchema)
+        resolver: zodResolver(LoginSchema)
     });
 
     function handleLogin(data: LogonData) {
