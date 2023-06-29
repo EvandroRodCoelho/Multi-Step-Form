@@ -2,18 +2,23 @@ import { act, fireEvent, render, screen, waitFor } from '@testing-library/react'
 import { Step2 } from './';
 import { MemoryRouter } from 'react-router-dom';
 import "@testing-library/jest-dom";
+import { useContext } from 'react';
+import { UserContext, UserProvider } from '../../../../context/userContext';
 describe('Step2', () => {
   it('should render address information form correctly', () => {
-    render(
+
+   const {getByPlaceholderText} = render(
       <MemoryRouter>
-        <Step2 />
+        <UserProvider>
+          <Step2 />
+        </UserProvider>
       </MemoryRouter>
     );
-    screen.debug();
-    const cepInput = screen.getByPlaceholderText('Enter Zip Code');
-    const cityInput = screen.getByPlaceholderText('Enter city');
-    const countryInput = screen.getByPlaceholderText('Enter country');
-    const stateInput = screen.getByPlaceholderText('Enter state');
+
+    const cepInput = getByPlaceholderText('Enter Zip Code');
+    const cityInput = getByPlaceholderText('Enter city');
+    const countryInput = getByPlaceholderText('Enter country');
+    const stateInput = getByPlaceholderText('Enter state');
 
     expect(cepInput).toBeInTheDocument();
     expect(cityInput).toBeInTheDocument();
@@ -21,8 +26,12 @@ describe('Step2', () => {
     expect(stateInput).toBeInTheDocument();
   });
   it("should show error message when fields was empty",async () => {
-    const {getByText, getByRole} = render(<Step2 />, { wrapper: MemoryRouter });
-
+    const {getByText, getByRole} = render(
+    <UserProvider>
+      <Step2 />
+    </UserProvider>    
+    , { wrapper: MemoryRouter });
+    
     const button = getByText('Next step')
     await act(()=> {
           fireEvent.click(button)
