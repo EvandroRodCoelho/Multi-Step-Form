@@ -1,50 +1,12 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Steps } from "../../../../components/register/steps";
 import { AiOutlineLinkedin, AiOutlineGithub } from "react-icons/ai";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useCallback, useContext, useEffect } from "react";
-import { UserContext } from "../../../../context/userContext";
-import { SocialProfileSchema } from "./SocialProfileSchema"
-import { UserSocialProfileData } from "../../../../types/userType";
+import { useStep3 } from"./useStep3"
 
 
 
 export function Step3() {
-    const {user, handleUser}  = useContext(UserContext);
-    const navigate = useNavigate();
-    console.log(user);
-    const {register, handleSubmit, formState:{errors} } = useForm<UserSocialProfileData>({
-        resolver: zodResolver(SocialProfileSchema)
-    });
-
-    function submit(data:UserSocialProfileData): void { 
-        event?.preventDefault();
-        handleUser({
-            address:user.address,
-            informationPessoal: user.informationPessoal,
-            socialProfile:data
-        });
-        console.log(data);
-    }
-    const checkFieldsStep3 =useCallback(() => {
-        const requiredFieldsStep3 = [
-          user.address.city,
-          user.address.country,
-          user.address.state,
-          user.address.zipCode,
-        ];
-
-        const isAnyFieldEmptyStep3 = requiredFieldsStep3.some((field) => field === "");
-      
-        return !isAnyFieldEmptyStep3;
-      },[user.address.city, user.address.country, user.address.state, user.address.zipCode]);
-
-    useEffect(() => {
-        if(!checkFieldsStep3()){
-            navigate("/register/step1")
-        }
-    },[checkFieldsStep3, navigate])
+    const {handleSubmit,submit,errors,register} = useStep3();
     return(
         <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
             <div>
@@ -119,3 +81,4 @@ export function Step3() {
         </div>
     );
 } 
+

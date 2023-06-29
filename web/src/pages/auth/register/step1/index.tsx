@@ -1,43 +1,11 @@
-import { useNavigate } from "react-router-dom";
-import { AiOutlineMail, AiOutlineEye, AiOutlineUser } from "react-icons/ai";
+import { AiOutlineEye, AiOutlineMail, AiOutlineUser } from "react-icons/ai";
 import { Steps } from "../../../../components/register/steps";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useContext } from "react";
-import { UserContext } from "../../../../context/userContext";
-import { UserInformationPersonalSchema } from "./UserInformationPersonalSchema"
-import { UserInformationPersonalData } from "./UserInformationPersonalData";
+import { useStep1 } from "./useStep1";
+import { Link } from "react-router-dom";
 
 
 export function Step1() {
-    const {user, handleUser}  = useContext(UserContext);
-
-    const {register, handleSubmit, formState:{errors} } = useForm<UserInformationPersonalData>({
-        resolver: zodResolver(UserInformationPersonalSchema),
-        defaultValues: {
-            fullName:user?.informationPessoal.fullName ,
-            email:user?.informationPessoal.email ,
-            gender:user?.informationPessoal.gender ,
-            password:user?.informationPessoal.password,
-            confirmPassword: ""
-        }
-    });
-    const navigate = useNavigate();
-
-function handleSubmitToStep2(data: UserInformationPersonalData): void { 
-    event?.preventDefault();
-    handleUser({
-        informationPessoal: {
-            email: data.email,
-            fullName: data.fullName,
-            gender: data.gender,
-            password: data.password
-        },
-        address: user.address,
-        socialProfile: user.socialProfile
-    });
-    navigate("/register/step2");
-}
+    const {errors,handleSubmit, handleSubmitNextStep, register} = useStep1()
     return(
     
         <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
@@ -46,7 +14,7 @@ function handleSubmitToStep2(data: UserInformationPersonalData): void {
                 <h1 className="text-2xl font-bold sm:text-3xl">Information personal</h1>
             </header>
         
-        <form action="" className="mx-auto mb-0 mt-8 max-w-md space-y-4" onSubmit={handleSubmit(handleSubmitToStep2)}>
+        <form action="" className="mx-auto mb-0 mt-8 max-w-md space-y-4" onSubmit={handleSubmit(handleSubmitNextStep)}>
 
             <div>
                 <label htmlFor="fullName" className="sr-only">Full Name</label>
@@ -159,7 +127,9 @@ function handleSubmitToStep2(data: UserInformationPersonalData): void {
             </div>
 
             <div className="flex items-center justify-between">
-                <div />
+                <Link to="/login" className="inline-block rounded-lg bg-blue-500 px-5 py-3 text-sm font-medium text-white">
+                    Login
+                </Link>
                 <button
                     type="submit"
                     className="inline-block rounded-lg bg-blue-500 px-5 py-3 text-sm font-medium text-white"

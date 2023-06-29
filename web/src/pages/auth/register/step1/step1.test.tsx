@@ -2,7 +2,7 @@ import "@testing-library/jest-dom";
 import { act, fireEvent, render, waitFor } from "@testing-library/react";
 import {describe, expect, it}  from "vitest";
 import { MemoryRouter } from 'react-router-dom';
-import { Step1 } from "./";
+import { Step1 } from ".";
 describe("Step 1", () => {
     it("should able renders the elements", ()=> {
         const {getByText, getByLabelText} = render(

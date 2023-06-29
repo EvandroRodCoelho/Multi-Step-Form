@@ -1,20 +1,9 @@
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
 import { AiOutlineEye, AiOutlineMail } from "react-icons/ai";
 import { Link } from "react-router-dom";
-import { LoginSchema } from "./LoginSchema";
-import { LoginData } from "../../../types/LoginData";
-
-
+import { useLogin } from "./useLogin";
 
 export function Login() {
-    const {register, handleSubmit, formState:{errors} } = useForm<LoginData>({
-        resolver: zodResolver(LoginSchema)
-    });
-
-    function handleLogin(data: LoginData) {
-        console.log(data);
-    }
+    const {errors,handleLogin,handleSubmit,register} = useLogin();
     return(
 
         <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">

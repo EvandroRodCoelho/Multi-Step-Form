@@ -1,119 +1,13 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { CiLocationOn } from "react-icons/ci";
 import { Steps } from "../../../../components/register/steps";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { useCallback, useContext,useEffect } from "react";
-import { UserContext } from "../../../../context/userContext";
-import axios from "axios";
-import { zipCodeMask } from "../../../../utils/masks/zipCodeMask";
-import states from '../../../../../stateBrazil.json';
-import { AddressInformationSchema } from "./AddressInformationSchema"
-import { AddressInformationData } from "../../../../types/userType";
+import { useStep2 } from "./useStep2";
 
 
 
 export function Step2() {
-  const { user, handleUser}  = useContext(UserContext);
-
-  const checkFields = useCallback(() => () =>{
-    // Definir os campos obrigatórios
-    const requiredFields = [
-      user.informationPessoal.email,
-      user.informationPessoal.fullName,
-      user.informationPessoal.password,
-      user.informationPessoal.gender,
-      user.address.city,
-      user.address.country,
-      user.address.state,
-      user.address.zipCode,
-      user.socialProfile.urlGitHub,
-      user.socialProfile.urlLinkedin,
-    ];
-
-    const isAnyFieldEmpty = requiredFields.some((field) => field === "");
-
-    return !isAnyFieldEmpty;
-  },[user.address.city, user.address.country, user.address.state, user.address.zipCode, user.informationPessoal.email, user.informationPessoal.fullName, user.informationPessoal.gender, user.informationPessoal.password, user.socialProfile.urlGitHub, user.socialProfile.urlLinkedin]);
-
-
-  const {register, handleSubmit, 
-    formState:{errors}, watch,
-    setValue } = useForm<AddressInformationData>({
-      resolver: zodResolver(AddressInformationSchema),
-      defaultValues: {
-        city:user?.address.city,
-        country:user?.address.country,
-        state:user?.address.state,
-        zipCode:user?.address.zipCode,
-      },
-      mode:"all",
-      criteriaMode:"all",
-
-  });
-
-  const navigate = useNavigate();
-  function handleSubmitToStep3(data:AddressInformationData,): void { 
-      event?.preventDefault();
-      handleUser({
-          socialProfile:user.socialProfile,
-          informationPessoal: user.informationPessoal,
-          address:data
-      });
-      navigate("/register/step3");
-  }
-
-  const zipCodeValue = watch("zipCode");
-
-  const handleSetValue = useCallback(async (value:AddressInformationData) => {
-    setValue("zipCode",value.zipCode);
-    setValue("city",value.city);
-    setValue("country",value.country);
-    setValue("state",value.state);
-  },[setValue]);
-
-  const handleGetAddress = useCallback(async (zipCode: string) => {
-    try {
-      const { data } = await axios.get(`https://viacep.com.br/ws/${zipCode}/json/`);
-  
-      if (data.error) throw new Error(data.error);
-  
-      const stateFiltered = states.UF.filter(state => data.uf === state.uf);
-      const stateName = stateFiltered.length > 0 ? stateFiltered[0].name : "";
-    
-      const address: AddressInformationData = {
-        zipCode:data.cep ? data.cep: zipCode,
-        city: data.localidade,
-        country: "Brasil",
-        state: stateName,
-      };
-      handleSetValue(address);
-    } catch (error) {
-      console.error('Erro ao obter o endereço:', error);
-      const errorAddress: AddressInformationData = {
-        zipCode: zipCode,
-        city: '',
-        country: '',
-        state: '',
-      };
-      handleSetValue(errorAddress);
-    }
-  }, [handleSetValue]);
-  
-  useEffect(() => {
-    const areAllFieldsFilled = checkFields();
-    if (!areAllFieldsFilled) { 
-      navigate("/register/step1")
-    }
-  }, [checkFields, navigate]);
  
-  useEffect(() => {
-    setValue("zipCode", zipCodeMask(zipCodeValue));
-    if (!zipCodeValue || zipCodeValue.length !== 9) return;
-  
-    handleGetAddress(zipCodeValue);
-  }, [handleGetAddress, setValue, zipCodeValue]);
-  
+  const {errors,handleSubmit,handleSubmitNextStep,register} = useStep2();
   return (
     <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
       <Steps  currentStep={2}/>
@@ -121,7 +15,7 @@ export function Step2() {
         <h1 className="text-2xl font-bold sm:text-3xl">Address Information</h1>
       </header>
 
-      <form action="" className="mx-auto mb-0 mt-8 max-w-md space-y-4"  onSubmit={handleSubmit(handleSubmitToStep3)}>
+      <form action="" className="mx-auto mb-0 mt-8 max-w-md space-y-4"  onSubmit={handleSubmit(handleSubmitNextStep)}>
         <div>
           <label htmlFor="zipCode" className="sr-only">
             Zip Code
