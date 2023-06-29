@@ -2,8 +2,7 @@ import { act, fireEvent, render, screen, waitFor } from '@testing-library/react'
 import { Step2 } from './';
 import { MemoryRouter } from 'react-router-dom';
 import "@testing-library/jest-dom";
-import { useContext } from 'react';
-import { UserContext, UserProvider } from '../../../../context/userContext';
+import {  UserProvider } from '../../../../context/userContext';
 describe('Step2', () => {
   it('should render address information form correctly', () => {
 

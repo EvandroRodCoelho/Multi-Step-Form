@@ -1,14 +1,14 @@
 import { Link, useNavigate } from "react-router-dom";
 import { Steps } from "../../../../components/register/steps";
 import { AiOutlineLinkedin, AiOutlineGithub } from "react-icons/ai";
-import { z } from "zod"; 
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useCallback, useContext, useEffect } from "react";
 import { UserContext } from "../../../../context/userContext";
 import { SocialProfileSchema } from "./SocialProfileSchema"
+import { UserSocialProfileData } from "../../../../types/userType";
 
-type UserSocialProfileData = z.infer <typeof SocialProfileSchema>;
+
 
 export function Step3() {
     const {user, handleUser}  = useContext(UserContext);

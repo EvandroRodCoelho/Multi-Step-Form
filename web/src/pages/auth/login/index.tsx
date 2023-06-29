@@ -2,17 +2,17 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { AiOutlineEye, AiOutlineMail } from "react-icons/ai";
 import { Link } from "react-router-dom";
-import { z } from "zod";
 import { LoginSchema } from "./LoginSchema";
+import { LoginData } from "../../../types/LoginData";
 
 
-type LogonData = z.infer <typeof LoginSchema>;
+
 export function Login() {
-    const {register, handleSubmit, formState:{errors} } = useForm<LogonData>({
+    const {register, handleSubmit, formState:{errors} } = useForm<LoginData>({
         resolver: zodResolver(LoginSchema)
     });
 
-    function handleLogin(data: LogonData) {
+    function handleLogin(data: LoginData) {
         console.log(data);
     }
     return(
