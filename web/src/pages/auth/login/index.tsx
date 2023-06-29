@@ -43,7 +43,7 @@ export function Login() {
                                 className={`h-4 w-4 text-zinc-800 data-[error]:text-red-500`}/>
                         </span>
                     </div>
-                    {errors.email && <p className="text-sm text-red-500 ">{errors.email.message}</p>}
+                    {errors.email && <p role="alert-email-invalid" className="text-sm text-red-500 ">{errors.email.message}</p>}
                 </div>
                 <div>
                     <label htmlFor="password" className="sr-only">Password</label>
@@ -64,10 +64,11 @@ export function Login() {
                                 className={`h-4 w-4 text-zinc-800 data-[error]:text-red-500`}/>
                         </span>
                     </div>
-                    {errors.password && <p className="text-sm text-red-500 ">{errors.password.message}</p>}
+                    {errors.password && <p role="alert-password-invalid" className="text-sm text-red-500 ">{errors.password.message}</p>}
                 </div>
                 <div className="flex items-center justify-between">
                     <button
+                        role="Login"
                         type="submit"
                         className=" w-full inline-block rounded-lg bg-blue-500 px-5 py-3 text-sm font-medium text-white"
                     >
