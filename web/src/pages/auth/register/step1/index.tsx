@@ -1,16 +1,12 @@
 import { useNavigate } from "react-router-dom";
 import { AiOutlineMail, AiOutlineEye, AiOutlineUser } from "react-icons/ai";
 import { Steps } from "../../../../components/register/steps";
-import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useContext } from "react";
 import { UserContext } from "../../../../context/userContext";
 import { UserInformationPersonalSchema } from "./UserInformationPersonalSchema"
-
-
-
-type UserInformationPersonalData = z.infer <typeof UserInformationPersonalSchema>;
+import { UserInformationPersonalData } from "./UserInformationPersonalData";
 
 
 export function Step1() {

@@ -1,7 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { CiLocationOn } from "react-icons/ci";
 import { Steps } from "../../../../components/register/steps";
-import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useCallback, useContext,useEffect } from "react";
@@ -10,9 +9,9 @@ import axios from "axios";
 import { zipCodeMask } from "../../../../utils/masks/zipCodeMask";
 import states from '../../../../../stateBrazil.json';
 import { AddressInformationSchema } from "./AddressInformationSchema"
+import { AddressInformationData } from "../../../../types/userType";
 
 
-type AddressInformationData = z.infer <typeof AddressInformationSchema>;
 
 export function Step2() {
   const { user, handleUser}  = useContext(UserContext);

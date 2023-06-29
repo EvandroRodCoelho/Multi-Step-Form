@@ -1,3 +1,6 @@
+import { z } from "zod";
+import { AddressInformationSchema } from "../pages/auth/register/step2/AddressInformationSchema";
+import { SocialProfileSchema } from "../pages/auth/register/step3/SocialProfileSchema";
 
 export interface informationPessoalType {
     fullName:string,
@@ -5,20 +8,12 @@ export interface informationPessoalType {
     password:string,
     gender:string
 }
-export interface addressType {
-    zipCode:string
-    city:string,
-    country:string,
-    state:string,
-  }
+export type AddressInformationData = z.infer <typeof AddressInformationSchema>;
 
-export interface socialProfileType {
-    urlGitHub:string,
-    urlLinkedin: string,
-}
+export type UserSocialProfileData = z.infer <typeof SocialProfileSchema>;
 
 export interface UserProps {
     informationPessoal : informationPessoalType
-    address: addressType
-    socialProfile : socialProfileType
+    address: AddressInformationData
+    socialProfile : UserSocialProfileData
 }
