@@ -23,7 +23,7 @@ export function Step1() {
                         type="text"
                         data-error={errors.fullName}
                         className={`w-full rounded-lg p-4 pe-12 text-sm 
-                        shadow-sm border border-zinc-900 data-[error]:border-red-500`}
+                        shadow-sm border border-zinc-900 data-[error]:border-red-500 focus:outline-none focus:border-0 focus:ring data-[error]:focus:ring-red-300 focus:ring-blue-400 `}
                         id="fullName" 
                         placeholder="Enter full name"
                         {...register("fullName")}
@@ -44,7 +44,7 @@ export function Step1() {
                 </label>
                 <div className="relative">
                     <select
-                        className={`w-full rounded-lg p-4 pe-12 text-sm shadow-sm border border-zinc-900 data-[error]:border-red-500`}
+                        className={`w-full rounded-lg p-4 pe-12 text-sm shadow-sm border border-zinc-900 data-[error]:border-red-500 focus:outline-none focus:border-0 focus:ring data-[error]:focus:ring-red-300 focus:ring-blue-400 `}
                         id="gender"
                         data-error={errors.gender}
                         {...register("gender")}
@@ -69,8 +69,8 @@ export function Step1() {
                 <div className="relative">
                     <input
                         type="email"
-                        data-error={errors.fullName}
-                        className={`w-full rounded-lg  p-4 pe-12 text-sm shadow-sm border border-zinc-900 data-[error]:border-red-500`}
+                        data-error={errors.email}
+                        className={`w-full rounded-lg  p-4 pe-12 text-sm shadow-sm border border-zinc-900 data-[error]:border-red-500 focus:outline-none focus:border-0 focus:ring data-[error]:focus:ring-red-300 focus:ring-blue-400 `}
                         placeholder="Enter email"
                         id="email"
                         {...register("email")}
@@ -98,7 +98,7 @@ export function Step1() {
                 <div className="relative">
                     <input
                         type="password"
-                        className={`w-full rounded-lg  p-4 pe-12 text-sm shadow-sm border border-zinc-900 data-[error]:border-red-500`}
+                        className={`w-full rounded-lg  p-4 pe-12 text-sm shadow-sm border border-zinc-900 data-[error]:border-red-500 focus:outline-none focus:border-0 focus:ring data-[error]:focus:ring-red-300 focus:ring-blue-400 `}
                         placeholder="Enter password"
                         id="password"
                         data-error={errors.password}
@@ -125,7 +125,7 @@ export function Step1() {
                 <div className="relative">
                     <input
                         type="password"
-                        className="w-full rounded-lg  p-4 pe-12 text-sm shadow-sm border border-zinc-900 data-[error]:border-red-500"
+                        className="w-full rounded-lg  p-4 pe-12 text-sm shadow-sm border border-zinc-900 data-[error]:border-red-500 focus:outline-none focus:border-0 focus:ring data-[error]:focus:ring-red-300 focus:ring-blue-400 "
                         placeholder="Enter a confirm password"
                         id="confirmPassword"
                         data-error={errors.confirmPassword}
@@ -147,12 +147,12 @@ export function Step1() {
             </div>
 
             <div className="flex items-center justify-between">
-                <Link to="/login" className="inline-block rounded-lg bg-blue-500 px-5 py-3 text-sm font-medium text-white">
+                <Link to="/login" className="inline-block rounded-lg bg-blue-700 px-5 py-3 text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring focus:ring-blue-400">
                     Login
                 </Link>
                 <button
                     type="submit"
-                    className="inline-block rounded-lg bg-blue-500 px-5 py-3 text-sm font-medium text-white"
+                    className="inline-block rounded-lg bg-blue-700 px-5 py-3 text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring focus:ring-blue-400"
                 >
                     Next step
                 </button>

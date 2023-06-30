@@ -60,7 +60,7 @@ export function Login() {
                         role="button"
                         type="submit"
                         title="email invalid"
-                        className=" w-full inline-block rounded-lg bg-blue-700 px-5 py-3 text-sm font-medium text-zinc-100"
+                        className=" w-full inline-block rounded-lg bg-blue-700 px-5 py-3 text-sm font-medium text-zinc-100 hover:bg-blue-800 focus:outline-none focus:ring focus:ring-blue-400"
                     >
                     Login
                     </button>

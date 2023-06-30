@@ -26,7 +26,7 @@ export function Step2() {
             <input
               type="text"
               data-error={errors.zipCode}
-              className={`w-full rounded-lg p-4 pe-12 text-sm shadow-sm border border-zinc-900 data-[error]:border-red-500`}
+              className={`w-full rounded-lg p-4 pe-12 text-sm shadow-sm border border-zinc-900 data-[error]:border-red-500 focus:outline-none focus:border-0 focus:ring data-[error]:focus:ring-red-300 focus:ring-blue-400 `}
               id="zipCode"
               placeholder="Enter Zip Code"
               maxLength={9}
@@ -55,7 +55,7 @@ export function Step2() {
             <input
               type="text"
               data-error={errors.city}
-              className={`w-full rounded-lg p-4 pe-12 text-sm shadow-sm border border-zinc-900 data-[error]:border-red-500`}
+              className={`w-full rounded-lg p-4 pe-12 text-sm shadow-sm border border-zinc-900 data-[error]:border-red-500 focus:outline-none focus:border-0 focus:ring data-[error]:focus:ring-red-300 focus:ring-blue-400 `}
               id="city"
               placeholder="Enter city"
               {...register("city")}
@@ -82,7 +82,7 @@ export function Step2() {
             <input
               type="text"
               data-error={errors.country}
-              className={`w-full rounded-lg p-4 pe-12 text-sm shadow-sm border border-zinc-900 data-[error]:border-red-500`}
+              className={`w-full rounded-lg p-4 pe-12 text-sm shadow-sm border border-zinc-900 data-[error]:border-red-500 focus:outline-none focus:border-0 focus:ring data-[error]:focus:ring-red-300 focus:ring-blue-400 `}
               id="country"
               placeholder="Enter country"
               {...register("country")}
@@ -109,7 +109,7 @@ export function Step2() {
             <input
               type="text"
               data-error={errors.state}
-              className={`w-full rounded-lg  p-4 pe-12 text-sm shadow-sm border border-zinc-900 data-[error]:border-red-500`}
+              className={`w-full rounded-lg  p-4 pe-12 text-sm shadow-sm border border-zinc-900 data-[error]:border-red-500 focus:outline-none focus:border-0 focus:ring data-[error]:focus:ring-red-300 focus:ring-blue-400 `}
               id="state"
               placeholder="Enter state"
               {...register("state")}
@@ -132,13 +132,13 @@ export function Step2() {
         <div className="flex items-center justify-between">
           <Link
             to="/register/step1"
-            className="inline-block rounded-lg bg-gray-500 px-5 py-3 text-sm font-medium text-white"
+            className="inline-block rounded-lg bg-blue-700 px-5 py-3 text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring focus:ring-blue-400"
           >
             Previous step
           </Link>
           <button
             type="submit"
-            className="inline-block rounded-lg bg-blue-500 px-5 py-3 text-sm font-medium text-white"
+            className="inline-block rounded-lg bg-blue-700 px-5 py-3 text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring focus:ring-blue-400"
           >
             Next step
           </button>

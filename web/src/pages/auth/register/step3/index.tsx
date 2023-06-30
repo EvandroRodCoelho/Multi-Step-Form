@@ -29,7 +29,7 @@ export function Step3() {
             <input
               type="url"
               data-error={errors.urlLinkedin}
-              className={`w-full rounded-lg  p-4 pe-12 text-sm shadow-sm border border-zinc-800 data-[error]:border-red-500`}
+              className={`w-full rounded-lg  p-4 pe-12 text-sm shadow-sm border border-zinc-800 data-[error]:border-red-500 focus:outline-none focus:border-0 focus:ring data-[error]:focus:ring-red-300 focus:ring-blue-400 `}
               placeholder="Enter a Linkedin URL"
               id="linkedinURl"
               {...register("urlLinkedin")}
@@ -58,7 +58,7 @@ export function Step3() {
             <input
               type="url"
               data-error={errors.urlGitHub}
-              className={`w-full rounded-lg p-4 pe-12 text-sm shadow-sm border border-zinc-900 data-[error]:border-red-500`}
+              className={`w-full rounded-lg p-4 pe-12 text-sm shadow-sm border border-zinc-900 data-[error]:border-red-500 focus:outline-none focus:border-0 focus:ring data-[error]:focus:ring-red-300 focus:ring-blue-400 `}
               placeholder="Enter a GitHub URL"
               id="GithubURl"
               {...register("urlGitHub")}
@@ -81,13 +81,13 @@ export function Step3() {
         <div className="flex items-center justify-between">
           <Link
             to="/register/step2"
-            className="inline-block rounded-lg bg-gray-500 px-5 py-3 text-sm font-medium text-white"
+            className="inline-block rounded-lg bg-blue-700 px-5 py-3 text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring focus:ring-blue-400"
           >
             Previous step
           </Link>
           <button
             type="submit"
-            className="inline-block rounded-lg bg-blue-500 px-5 py-3 text-sm font-medium text-white"
+            className="inline-block rounded-lg bg-blue-700 px-5 py-3 text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring focus:ring-blue-400"
           >
             Finish
           </button>
