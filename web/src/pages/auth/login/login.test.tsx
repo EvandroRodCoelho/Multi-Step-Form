@@ -36,7 +36,5 @@ describe("Step 1", () => {
             expect(getByTitle("password invalid")).toBeVisible();
             expect(getByTitle("email invalid")).toBeVisible();
         })
-
-
     })
 });
