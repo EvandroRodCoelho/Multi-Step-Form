@@ -29,6 +29,8 @@
     "vitest": "^0.32.2"
   },
   "dependencies": {
-    "fastify": "^4.19.0"
+    "@prisma/client": "^4.16.2",
+    "fastify": "^4.19.0",
+    "zod": "^3.21.4"
   }
 }
