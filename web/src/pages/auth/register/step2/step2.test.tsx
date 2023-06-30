@@ -25,7 +25,7 @@ describe('Step2', () => {
     expect(stateInput).toBeInTheDocument();
   });
   it("should show error message when fields was empty",async () => {
-    const {getByText, getByRole} = render(
+    const {getByText, getByTitle} = render(
     <UserProvider>
       <Step2 />
     </UserProvider>    
@@ -37,7 +37,7 @@ describe('Step2', () => {
       })
     expect(screen.getByLabelText("Zip Code")).toHaveValue("");
 
-    const errorElement = getByRole('alert-Zipcode');
+    const errorElement = getByTitle('Zip Code invalid');
 
     await waitFor(()=> {
         expect(getByText("City is required")).toBeVisible();

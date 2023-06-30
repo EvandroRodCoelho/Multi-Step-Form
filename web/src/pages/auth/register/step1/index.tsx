@@ -55,7 +55,12 @@ export function Step1() {
                         <option value="other">Other</option>
                     </select>
                 </div>
-                {errors.gender && <p className="text-sm text-red-500 ">{errors.gender.message}</p>}
+                {errors.gender && 
+                <p   title="genderInvalid"
+                role="alert" 
+                className="text-sm text-red-500 ">
+                    {errors.gender.message}
+                </p>}
             </div>
 
 
@@ -77,7 +82,12 @@ export function Step1() {
                             className={`h-4 w-4 text-zinc-800 data-[error]:text-red-500`}/>
                     </span>
                 </div>
-                {errors.email && <p className="text-sm text-red-500 ">{errors.email.message}</p>}
+                {errors.email && 
+                <p title="emailInvalid"
+                   role="alert"  
+                   className="text-sm text-red-500 ">
+                    {errors.email.message}
+                </p>}
             </div>
 
             
@@ -101,7 +111,12 @@ export function Step1() {
                             className={`h-4 w-4 text-zinc-800 data-[error]:text-red-500`}/>
                     </span>
                 </div>
-                {errors.password && <p className="text-sm text-red-500 ">{errors.password.message}</p>}
+                {errors.password && 
+                <p title="passwordInvalid"
+                    role="alert"                  
+                    className="text-sm text-red-500 ">
+                    {errors.password.message}
+                </p>}
             </div>
 
             <div>
@@ -123,7 +138,12 @@ export function Step1() {
                             className={`h-4 w-4 text-zinc-800 data-[error]:text-red-500` }/>
                     </span>
                 </div>
-                {errors.confirmPassword && <p className="text-sm text-red-500">{errors.confirmPassword.message}</p>}
+                {errors.confirmPassword && 
+                <p title="confirmPasswordInvalid"
+                    role="alert"
+                    className="text-sm text-red-500">
+                        {errors.confirmPassword.message}
+                </p>}
             </div>
 
             <div className="flex items-center justify-between">

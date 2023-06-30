@@ -1,5 +1,5 @@
 import "@testing-library/jest-dom";
-import { act, fireEvent, getByRole, render, waitFor } from "@testing-library/react";
+import { act, fireEvent, getAllByRole, getByRole, render, waitFor } from "@testing-library/react";
 import {describe, expect, it}  from "vitest";
 import { MemoryRouter } from 'react-router-dom';
 import { Login } from "./";
@@ -20,7 +20,7 @@ describe("Step 1", () => {
     })
 
     it("should able invalid login render message error", async () => {
-        const { getByRole } = render(
+        const { getByTitle,getByRole } = render(
             <MemoryRouter>
                 <UserProvider>
                     <Login />
@@ -28,13 +28,13 @@ describe("Step 1", () => {
             </MemoryRouter>
         );
 
-        const button = getByRole('Login');
+        const button = getByRole('button');
         act(()=> {
             fireEvent.click(button)
         })
         await waitFor(()=> {
-            expect(getByRole("alert-email-invalid")).toBeVisible();
-            expect(getByRole("alert-password-invalid")).toBeVisible();
+            expect(getByTitle("password invalid")).toBeVisible();
+            expect(getByTitle("email invalid")).toBeVisible();
         })
 
 
