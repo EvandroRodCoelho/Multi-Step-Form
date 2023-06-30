@@ -1,12 +1,12 @@
 import "@testing-library/jest-dom";
-import { act, fireEvent, getAllByRole, getByRole, render, waitFor } from "@testing-library/react";
+import { act, fireEvent, render, waitFor } from "@testing-library/react";
 import {describe, expect, it}  from "vitest";
 import { MemoryRouter } from 'react-router-dom';
 import { Login } from "./";
 import { UserProvider } from "../../../context/userContext";
 describe("Step 1", () => {
     it("should able renders the elements", ()=> {
-        const {getByText, getByLabelText} = render(
+        const {getByLabelText} = render(
         <MemoryRouter>
             <UserProvider>
                 <Login />
