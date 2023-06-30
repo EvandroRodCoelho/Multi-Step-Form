@@ -13,7 +13,9 @@ export function useStep3() {
     const navigate = useNavigate();
 
     const {register, handleSubmit, formState:{errors} } = useForm<UserSocialProfileData>({
-        resolver: zodResolver(SocialProfileSchema)
+        resolver: zodResolver(SocialProfileSchema),        
+        mode:"all",
+        criteriaMode:"all",
     });
 
     function submit(data:UserSocialProfileData): void { 

@@ -18,7 +18,9 @@ export function useStep1() {
             gender:user?.informationPessoal.gender ,
             password:user?.informationPessoal.password,
             confirmPassword: ""
-        }
+        },
+        mode:"all",
+        criteriaMode:"all",
     });
     const navigate = useNavigate();
 

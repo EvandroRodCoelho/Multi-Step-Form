@@ -20,9 +20,6 @@ export function useStep2() {
       return informTest.length > 0;
     }, [user.informationPessoal]);
       
-  
-  
-  
     const {register, handleSubmit, 
       formState:{errors}, watch,
       setValue } = useForm<AddressInformationData>({
@@ -35,7 +32,6 @@ export function useStep2() {
         },
         mode:"all",
         criteriaMode:"all",
-  
     });
   
     const navigate = useNavigate();
