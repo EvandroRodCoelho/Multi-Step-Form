@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../../../context/userContext";
 import { UserSocialProfileData } from "../../../../types/userType";
 import { SocialProfileSchema } from "./SocialProfileSchema";
+import axios from "axios";
 
 export function useStep3() {
     const {user, handleUser}  = useContext(UserContext);
@@ -18,14 +19,22 @@ export function useStep3() {
         criteriaMode:"all",
     });
 
-    function submit(data:UserSocialProfileData): void { 
+    async function submit(data:UserSocialProfileData):Promise<void> { 
         event?.preventDefault();
         handleUser({
             address:user.address,
             informationPessoal: user.informationPessoal,
             socialProfile:data
-        });
-        console.log(data);
+        }); 
+        
+        try {
+            await axios.post('http://localhost:3333/register/create', user); 
+            navigate("/login")
+        }
+        catch {
+            console.log(user);
+            console.log("error");
+        }
     }
     const checkFieldsStep3 =useCallback(() => {
         const requiredFieldsStep3 = [
