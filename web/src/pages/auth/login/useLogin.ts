@@ -1,11 +1,11 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { LoginSchema } from "./LoginSchema";
-import { LoginData } from "../../../types/LoginData";
-import { useForm } from "react-hook-form";
 import axios, { AxiosError } from "axios";
-import { UserContext } from "../../../context/userContext";
 import { useContext } from "react";
+import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../../../context/userContext";
+import { LoginData } from "../../../types/LoginData";
+import { LoginSchema } from "./LoginSchema";
 
 
 export function useLogin () {
@@ -15,6 +15,7 @@ export function useLogin () {
     });
     const navigate = useNavigate(); 
     const { handleUser, setIsAuthenticated } = useContext(UserContext);
+    
   
     async function handleLogin(data:LoginData) {
         try {
@@ -32,11 +33,13 @@ export function useLogin () {
               setError("password",{message:"Invalid password"})
               return;
            } 
+           alert("Error")
         }}
     return {
         register,
         handleSubmit,
         errors,
-        handleLogin
+        handleLogin,
+        
     }
 }
