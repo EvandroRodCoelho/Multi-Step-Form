@@ -5,12 +5,13 @@ import { UserInformationPersonalSchema } from "./UserInformationPersonalSchema";
 import { UserContext } from "../../../../context/userContext";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigate } from "react-router-dom";
+import axios, { AxiosError } from "axios";
 
 export function useStep1() {
 
     const {user, handleUser}  = useContext(UserContext);
 
-    const {register, handleSubmit, formState:{errors} } = useForm<UserInformationPersonalData>({
+    const {register, handleSubmit, formState:{errors}, setError } = useForm<UserInformationPersonalData>({
         resolver: zodResolver(UserInformationPersonalSchema),
         defaultValues: {
             fullName:user?.informationPessoal.fullName ,
@@ -26,18 +27,27 @@ export function useStep1() {
 
     async function handleSubmitNextStep(data: UserInformationPersonalData)  { 
         event?.preventDefault();
-       await handleUser({
-            informationPessoal: {
-                email: data.email,
-                fullName: data.fullName,
-                gender: data.gender,
-                password: data.password
-            },
-            address: user.address,
-            socialProfile: user.socialProfile
-        });
-
-        navigate("/register/step2");
+       try {
+          await axios.post('http://localhost:3333/login', data); 
+       }catch (error) {
+        if ((error as AxiosError)?.response?.status === 404) {
+            await handleUser({
+                informationPessoal: {
+                    email: data.email,
+                    fullName: data.fullName,
+                    gender: data.gender,
+                    password: data.password
+                },
+                address: user.address,
+                socialProfile: user.socialProfile
+            });
+            navigate("/register/step2");
+          } 
+          if ((error as AxiosError)?.response?.status === 401) {
+            setError("email",{message:"Email is exists"});
+          } 
+          
+       }
     }
     return {
         handleSubmitNextStep,
