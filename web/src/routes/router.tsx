@@ -5,6 +5,7 @@ import { Error }   from "../pages/error"
 import { Step3 } from "../pages/auth/register/step3";
 import { Step2} from "../pages/auth/register/step2";
 import { Login } from "../pages/auth/login";
+import { UserDashboard } from "../pages/userDashboard";
 export const router = createBrowserRouter([ 
     {
         path:"/",
@@ -26,5 +27,9 @@ export const router = createBrowserRouter([
     {
         path:"/register/step3",
         element:<Step3  />
+    },
+    {
+        path:"/user/dashboard",
+        element:<UserDashboard  />
     }
 ]);
