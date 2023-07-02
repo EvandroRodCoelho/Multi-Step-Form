@@ -8,18 +8,19 @@
   },
   "scripts": {
     "test": "vitest",
-    "dev": "tsx src/serve.ts",
+    "dev": "tsx watch src/serve.ts",
     "build": "tsup src"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/fastify-cors": "^2.1.0",
     "@types/node": "^20.3.2",
     "@typescript-eslint/eslint-plugin": "^5.60.1",
     "eslint": "^8.43.0",
     "eslint-config-standard-with-typescript": "^36.0.0",
-    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-n": "^15.7.0",
     "eslint-plugin-promise": "^6.1.1",
     "prisma": "^4.16.2",
@@ -29,8 +30,10 @@
     "vitest": "^0.32.2"
   },
   "dependencies": {
+    "@fastify/cors": "^8.3.0",
     "@prisma/client": "^4.16.2",
     "fastify": "^4.19.0",
+    "fastify-cors": "^6.1.0",
     "zod": "^3.21.4"
   }
 }
