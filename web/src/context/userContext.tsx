@@ -8,13 +8,13 @@ const UserContext = createContext<UserProviderProps>({} as UserProviderProps);
 function UserProvider({ children }:{ children: ReactNode} ) {
     
     const [user , setUser] = useState<UserProps>(mockedUser)
-
+    const [isAuthenticated ,setIsAuthenticated] = useState(false);
     function handleUser(user:UserProps) {
         setUser(user);
     }
 
     return (
-        <UserContext.Provider value={{user,handleUser}} >
+        <UserContext.Provider value={{user,handleUser,isAuthenticated,setIsAuthenticated}} >
             {children}
         </UserContext.Provider>
     );
