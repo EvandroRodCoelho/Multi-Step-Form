@@ -18,7 +18,7 @@ describe('Steps', () => {
     expect(step3Element).toBeInTheDocument();
 
     expect(step1Element).toHaveClass('bg-gray-300');
-    expect(step2Element).toHaveClass('bg-blue-500');
+    expect(step2Element).toHaveClass('bg-blue-800');
     expect(step3Element).toHaveClass('bg-gray-300');
   });
 
