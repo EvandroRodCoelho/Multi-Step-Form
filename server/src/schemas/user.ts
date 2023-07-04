@@ -20,7 +20,7 @@ const informationPessoalSchema =  z.object({
     password: z.string().nonempty("Password is required"),
     gender: z.string().nonempty("Gender is required"),
   })
-export const createUserSchema = z.object({
+export const userSchema = z.object({
   informationPessoal:informationPessoalSchema,
   address: addressSchema,
   socialProfile: socialProfileSchema,
