@@ -3,10 +3,14 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "engines": {
+    "node": "18"
+  },
   "scripts": {
     "test": "vitest",
     "dev": "tsx watch src/serve.ts",
-    "build": "tsup src"
+    "build": "tsup src",
+    "start": "node dist/serve.js"
   },
   "keywords": [],
   "author": "",
