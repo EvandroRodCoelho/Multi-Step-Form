@@ -62,6 +62,48 @@ describe("User Controller", ()=> {
         
         await prisma.$disconnect();
       });
+      it('should then delete a  user', async () => {
+        const app = createTestServer();
+        const userData = {
+            informationPessoal: {
+              email: "exemplo@teste.com",
+              fullName: "Nome Sobrenome",
+              password: "senha123",
+              gender: "Masculino",
+            },
+            address: {
+              city: "Cidade",
+              country: "País",
+              state: "Estado",
+              zipCode: "12345-678",
+            },
+            socialProfile: {
+              urlGitHub: "https://github.com/seu-usuario",
+              urlLinkedin: "https://linkedin.com/in/seu-usuario",
+            },
+          };
+
+         
+          const user = await prisma.user.findFirst({ where: { email : userData.informationPessoal.email} });
+          if (!user) {
+            const response = await app.inject({
+              method: 'POST',
+              url: '/register/create',
+              payload: userData,
+            });
+          
+            expect(response.statusCode).toBe(201);
+          }
+          const deleteUser = await app.inject({
+            method: 'delete',
+            url: '/user/delete',
+            payload:{
+                email:userData.informationPessoal.email
+            },
+          });
+          expect(deleteUser.statusCode).toBe(200)
+        await prisma.$disconnect();
+      });
       
     
       it('getUserByEmail should return "Email is exist" for existing email', async () => {
