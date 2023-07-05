@@ -16,7 +16,7 @@ export function useHeader() {
     async function handleDelete( ) {
         console.log("ola")
         try {
-            const response = await axios.delete("http://localhost:3333/user/delete", {
+            const response = await axios.delete(`${import.meta.env.VITE_REACT_BASE_URL}/user/delete`, {
              data: {
                 "email": user.informationPessoal.email
              }   

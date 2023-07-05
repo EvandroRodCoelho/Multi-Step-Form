@@ -18,8 +18,10 @@ export function useLogin () {
     
   
     async function handleLogin(data:LoginData) {
+
         try {
-          const response = await axios.post('http://localhost:3333/login', data); 
+          const response = await axios.post(`${import.meta.env.VITE_REACT_BASE_URL}/login` , data); 
+          
           handleUser(response.data);
           setIsAuthenticated(true);
           navigate('/user/dashboard');

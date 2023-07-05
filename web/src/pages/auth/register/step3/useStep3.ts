@@ -28,11 +28,10 @@ export function useStep3() {
         }); 
         
         try {
-            await axios.post('http://localhost:3333/register/create', user); 
+            await axios.post(`${import.meta.env.VITE_REACT_BASE_URL}/register/create`, user); 
             navigate("/login")
         }
         catch {
-            console.log(user);
             console.log("error");
         }
     }
