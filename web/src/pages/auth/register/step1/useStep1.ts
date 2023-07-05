@@ -28,7 +28,10 @@ export function useStep1() {
     async function handleSubmitNextStep(data: UserInformationPersonalData)  { 
         event?.preventDefault();
        try {
-          await axios.post(`${import.meta.env.VITE_REACT_BASE_URL}/register/step1`, data); 
+          await axios.post(`${import.meta.env.VITE_REACT_BASE_URL}/register/step1`, {
+            "email": data.email
+          }); 
+          navigate("/register/step2");
        }catch (error) {
         if ((error as AxiosError)?.response?.status === 404) {
             await handleUser({
