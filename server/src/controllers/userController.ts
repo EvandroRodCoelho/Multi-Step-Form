@@ -49,16 +49,12 @@ export async function getUserByEmail(req:FastifyRequest,res:FastifyReply) {
         if(user) {
           return res.status(401).send({ error: "Email is exist" });
         }
-        
-        prisma.$disconnect;
-        
       }
       catch (err) {
+        console.error(err);
         if(res.statusCode === 404) {
-          prisma.$disconnect;
           return res.status(200).send("Passed");
         }
-        prisma.$disconnect;
         return res.status(500).send("Error logging in");
       }
 
@@ -98,6 +94,7 @@ export async function handleLogin(req:FastifyRequest,res:FastifyReply) {
         };
         return res.status(200).send(userSend);
       } catch (err) {
+        console.error(err);
         return res.status(500).send("Error logging in");
       }
 }
