@@ -1,6 +1,6 @@
 -- CreateTable
 CREATE TABLE "User" (
-    "id" TEXT NOT NULL PRIMARY KEY,
+    "id" TEXT NOT NULL,
     "fullName" TEXT NOT NULL,
     "email" TEXT NOT NULL,
     "password" TEXT NOT NULL,
@@ -10,7 +10,9 @@ CREATE TABLE "User" (
     "country" TEXT NOT NULL,
     "state" TEXT NOT NULL,
     "urlLinkedin" TEXT NOT NULL,
-    "urlGitHub" TEXT NOT NULL
+    "urlGitHub" TEXT NOT NULL,
+
+    CONSTRAINT "User_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateIndex
