@@ -9,7 +9,9 @@
   "scripts": {
     "test": "vitest",
     "dev": "tsx watch src/serve.ts",
-    "vercel-build":"npx prisma migrate deploy"
+    "vercel-build":"npx prisma migrate deploy",
+    "build":"tsup src",
+    "start":"node dist/serve.js"
   },
   "keywords": [],
   "author": "",
