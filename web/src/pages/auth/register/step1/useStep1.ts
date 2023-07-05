@@ -31,6 +31,16 @@ export function useStep1() {
           await axios.post(`${import.meta.env.VITE_REACT_BASE_URL}/register/step1`, {
             "email": data.email
           }); 
+          await handleUser({
+            informationPessoal: {
+                email: data.email,
+                fullName: data.fullName,
+                gender: data.gender,
+                password: data.password
+            },
+            address: user.address,
+            socialProfile: user.socialProfile
+        });
           navigate("/register/step2");
        }catch (error) {
         if ((error as AxiosError)?.response?.status === 404) {
